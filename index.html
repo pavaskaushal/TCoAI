@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Cost Calculator — TCoAI Framework</title>
+  <meta name="description" content="Calculate the Total Cost of AI Ownership across sectors, business lines, and deployment scenarios. Companion tool to Beyond the Hype white paper." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/variables.css" />
+  <link rel="stylesheet" href="assets/css/reset.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+</head>
+
+<body>
+<div class="app">
+
+  <!-- ── Header ─────────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header__logo">
+      <div class="header__logo-mark">AI</div>
+      <div class="header__title">
+        <span class="header__name">AI Cost Calculator</span>
+        <span class="header__sub">TCoAI Framework · Beyond the Hype</span>
+      </div>
+    </div>
+    <span class="header__badge">July 2026 Pricing</span>
+  </header>
+
+  <!-- ── Main ───────────────────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- ════════════════════════════════════════════════════════════
+         SIDEBAR — INPUT PANEL
+    ════════════════════════════════════════════════════════════ -->
+    <aside class="sidebar">
+
+      <!-- Tab bar -->
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="context">Context</button>
+        <button class="tab-btn" data-tab="deployment">Deploy</button>
+        <button class="tab-btn" data-tab="scenarios">Scenarios</button>
+        <button class="tab-btn" data-tab="advanced">Advanced</button>
+      </div>
+
+      <!-- ── TAB 1: Context ─────────────────────────────────────── -->
+      <div class="tab-panel active" id="tab-context">
+
+        <div class="input-group">
+          <label class="input-label" for="currency">Currency</label>
+          <select class="select" id="currency"></select>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="region">Region <span>FTE cost defaults</span></label>
+          <select class="select" id="region"></select>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="org-size">Organisation Size</label>
+          <select class="select" id="org-size">
+            <option>Small</option>
+            <option selected>Mid-size</option>
+            <option>Large</option>
+            <option>Enterprise</option>
+          </select>
+          <div class="input-hint">Small &lt;$50M · Mid $50M–$500M · Large $500M–$5B · Enterprise &gt;$5B</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="input-group">
+          <label class="input-label" for="sector">Industry Sector</label>
+          <select class="select" id="sector"></select>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="business-line">Business Line</label>
+          <select class="select" id="business-line"></select>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="use-case">AI Use Case</label>
+          <select class="select" id="use-case"></select>
+        </div>
+
+        <!-- Benchmark box -->
+        <div id="benchmark-box" style="display:none;
+             background:rgba(124,58,237,0.12);
+             border-radius:var(--radius-md);
+             padding:var(--space-3) var(--space-4);
+             border:1px solid rgba(124,58,237,0.2);">
+        </div>
+
+      </div>
+
+      <!-- ── TAB 2: Deployment ──────────────────────────────────── -->
+      <div class="tab-panel" id="tab-deployment">
+
+        <div class="input-group">
+          <label class="input-label" for="ai-type">AI Type</label>
+          <select class="select" id="ai-type">
+            <option>Generative AI</option>
+            <option>Predictive AI</option>
+            <option>RPA</option>
+            <option>Computer Vision</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="procurement">Procurement Approach</label>
+          <select class="select" id="procurement">
+            <option selected>API</option>
+            <option>Buy (SaaS)</option>
+            <option>Build</option>
+            <option>Open Source</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="model-tier">Model Tier</label>
+          <select class="select" id="model-tier">
+            <option>Flash</option>
+            <option selected>Mid</option>
+            <option>Frontier</option>
+            <option>Open Source</option>
+          </select>
+          <div class="input-hint" id="token-hint"></div>
+        </div>
+
+        <!-- Pricing reference -->
+        <div>
+          <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none';this.textContent=this.textContent.includes('Show')?'▲ Hide pricing':'▼ Show pricing reference'"
+            style="font-size:var(--text-xs);color:var(--cyan);background:none;border:none;
+                   cursor:pointer;font-family:var(--font-mono);letter-spacing:0.04em;padding:0;">
+            ▼ Show pricing reference
+          </button>
+          <div style="display:none;margin-top:var(--space-3);">
+            <table style="width:100%;font-size:var(--text-xs);font-family:var(--font-mono);border-collapse:collapse;">
+              <thead>
+                <tr>
+                  <th style="text-align:left;padding:5px 8px;color:#7A7A74;border-bottom:1px solid rgba(255,255,255,0.08);font-weight:600;">Model</th>
+                  <th style="text-align:right;padding:5px 8px;color:#7A7A74;border-bottom:1px solid rgba(255,255,255,0.08);font-weight:600;">In/1M</th>
+                  <th style="text-align:right;padding:5px 8px;color:#7A7A74;border-bottom:1px solid rgba(255,255,255,0.08);font-weight:600;">Out/1M</th>
+                </tr>
+              </thead>
+              <tbody id="pricing-table-body"></tbody>
+            </table>
+            <div style="margin-top:var(--space-2);font-size:var(--text-xs);color:#7A7A74;line-height:1.6;">
+              July 2026 ·
+              <a href="https://platform.openai.com/docs/pricing" target="_blank" style="color:var(--cyan);">OpenAI</a> ·
+              <a href="https://www.anthropic.com/pricing" target="_blank" style="color:var(--cyan);">Anthropic</a> ·
+              <a href="https://ai.google.dev/pricing" target="_blank" style="color:var(--cyan);">Google</a> ·
+              <a href="https://cohere.com/pricing" target="_blank" style="color:var(--cyan);">Cohere</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="input-group">
+          <label class="input-label" for="transaction-type">Transaction Type</label>
+          <select class="select" id="transaction-type">
+            <option>Simple query / routing</option>
+            <option selected>Customer service interaction</option>
+            <option>Document processing</option>
+            <option>Complex analysis / report</option>
+            <option>Long document generation</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="daily-volume">Daily Transaction Volume</label>
+          <div class="input-wrapper">
+            <input class="input-number" type="number" id="daily-volume" value="5000" min="1" />
+            <span class="input-suffix">/ day</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="fte-count">Current FTE Count</label>
+          <div class="input-wrapper">
+            <input class="input-number" type="number" id="fte-count" value="50" min="1" />
+            <span class="input-suffix">FTEs</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="fte-level">FTE Role Level</label>
+          <select class="select" id="fte-level">
+            <option>Junior</option>
+            <option selected>Mid-level</option>
+            <option>Senior</option>
+          </select>
+          <div class="input-hint" id="fte-cost-hint"></div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="working-days">Annual Working Days</label>
+          <div class="input-wrapper">
+            <input class="input-number" type="number" id="working-days" value="250" min="1" max="365" />
+            <span class="input-suffix">days</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── TAB 3: Scenarios ───────────────────────────────────── -->
+      <div class="tab-panel" id="tab-scenarios">
+
+        <!-- Conservative -->
+        <div style="padding:var(--space-4);background:rgba(255,179,19,0.08);
+                    border-radius:var(--radius-md);border:1px solid rgba(255,179,19,0.2);">
+          <div style="font-size:var(--text-xs);font-weight:700;color:#FFB313;
+                      letter-spacing:0.06em;text-transform:uppercase;
+                      margin-bottom:var(--space-3);">
+            Conservative
+          </div>
+          <div class="input-group">
+            <label class="input-label">AI Deflection Rate</label>
+            <input class="input-range" type="range" id="deflection-conservative" min="10" max="90" value="35" step="5" />
+            <div class="range-labels">
+              <span class="range-label">10%</span>
+              <span class="range-value" id="deflection-conservative-display">35%</span>
+              <span class="range-label">90%</span>
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">FTE Reduction Rate</label>
+            <input class="input-range" type="range" id="fte-reduction-conservative" min="10" max="90" value="30" step="5" />
+            <div class="range-labels">
+              <span class="range-label">10%</span>
+              <span class="range-value" id="fte-reduction-conservative-display">30%</span>
+              <span class="range-label">90%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Base -->
+        <div style="padding:var(--space-4);background:rgba(50,168,154,0.08);
+                    border-radius:var(--radius-md);border:1px solid rgba(50,168,154,0.2);">
+          <div style="font-size:var(--text-xs);font-weight:700;color:#32A89A;
+                      letter-spacing:0.06em;text-transform:uppercase;
+                      margin-bottom:var(--space-3);">
+            Base Case
+          </div>
+          <div class="input-group">
+            <label class="input-label">AI Deflection Rate</label>
+            <input class="input-range" type="range" id="deflection-base" min="10" max="90" value="55" step="5" />
+            <div class="range-labels">
+              <span class="range-label">10%</span>
+              <span class="range-value" id="deflection-base-display">55%</span>
+              <span class="range-label">90%</span>
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">FTE Reduction Rate</label>
+            <input class="input-range" type="range" id="fte-reduction-base" min="10" max="90" value="50" step="5" />
+            <div class="range-labels">
+              <span class="range-label">10%</span>
+              <span class="range-value" id="fte-reduction-base-display">50%</span>
+              <span class="range-label">90%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aggressive -->
+        <div style="padding:var(--space-4);background:rgba(219,78,109,0.08);
+                    border-radius:var(--radius-md);border:1px solid rgba(219,78,109,0.2);">
+          <div style="font-size:var(--text-xs);font-weight:700;color:#DB4E6D;
+                      letter-spacing:0.06em;text-transform:uppercase;
+                      margin-bottom:var(--space-3);">
+            Aggressive
+          </div>
+          <div class="input-group">
+            <label class="input-label">AI Deflection Rate</label>
+            <input class="input-range" type="range" id="deflection-aggressive" min="10" max="90" value="75" step="5" />
+            <div class="range-labels">
+              <span class="range-label">10%</span>
+              <span class="range-value" id="deflection-aggressive-display">75%</span>
+              <span class="range-label">90%</span>
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">FTE Reduction Rate</label>
+            <input class="input-range" type="range" id="fte-reduction-aggressive" min="10" max="90" value="70" step="5" />
+            <div class="range-labels">
+              <span class="range-label">10%</span>
+              <span class="range-value" id="fte-reduction-aggressive-display">70%</span>
+              <span class="range-label">90%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── TAB 4: Advanced ────────────────────────────────────── -->
+      <div class="tab-panel" id="tab-advanced">
+
+        <div class="input-hint" style="color:#7A7A74;line-height:1.6;">
+          Leave blank to use research-backed defaults. Override only what differs from your organisation.
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="discount-rate">Discount Rate (NPV)</label>
+          <div class="input-wrapper">
+            <input class="input-number" type="number" id="discount-rate" value="10" min="1" max="50" />
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="custom-impl-cost">Custom Implementation Cost</label>
+          <div class="input-wrapper">
+            <input class="input-number" type="number" id="custom-impl-cost" placeholder="e.g. 200000" min="0" />
+            <span class="input-suffix">USD</span>
+          </div>
+          <div class="input-hint" id="impl-hint"></div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="custom-fte-cost">Custom FTE Annual Cost</label>
+          <div class="input-wrapper">
+            <input class="input-number" type="number" id="custom-fte-cost" placeholder="e.g. 75000" min="0" />
+            <span class="input-suffix">USD/yr</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="custom-input-token">Custom Input Token Cost</label>
+          <div class="input-wrapper">
+            <input class="input-number" type="number" id="custom-input-token" placeholder="e.g. 1.25" min="0" step="0.01" />
+            <span class="input-suffix">$/1M</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="custom-output-token">Custom Output Token Cost</label>
+          <div class="input-wrapper">
+            <input class="input-number" type="number" id="custom-output-token" placeholder="e.g. 5.00" min="0" step="0.01" />
+            <span class="input-suffix">$/1M</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div style="font-size:var(--text-xs);font-weight:700;color:#B0AFA8;
+                    letter-spacing:0.06em;text-transform:uppercase;
+                    margin-bottom:var(--space-2);">
+          Indirect Costs (% of Implementation)
+        </div>
+
+        <table style="width:100%;border-collapse:collapse;">
+          <tr>
+            <td style="padding:0 var(--space-2) var(--space-3) 0;width:50%;vertical-align:top;">
+              <div class="input-label" style="margin-bottom:var(--space-2);">Integration</div>
+              <div class="input-wrapper">
+                <input class="input-number" type="number" id="pct-integration" value="30" min="0" max="100" />
+                <span class="input-suffix">%</span>
+              </div>
+            </td>
+            <td style="padding:0 0 var(--space-3) var(--space-2);width:50%;vertical-align:top;">
+              <div class="input-label" style="margin-bottom:var(--space-2);">Data Prep</div>
+              <div class="input-wrapper">
+                <input class="input-number" type="number" id="pct-data-prep" value="25" min="0" max="100" />
+                <span class="input-suffix">%</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:0 var(--space-2) 0 0;vertical-align:top;">
+              <div class="input-label" style="margin-bottom:var(--space-2);">Change Mgmt</div>
+              <div class="input-wrapper">
+                <input class="input-number" type="number" id="pct-change-mgmt" value="20" min="0" max="100" />
+                <span class="input-suffix">%</span>
+              </div>
+            </td>
+            <td style="padding:0 0 0 var(--space-2);vertical-align:top;">
+              <div class="input-label" style="margin-bottom:var(--space-2);">Project Mgmt</div>
+              <div class="input-wrapper">
+                <input class="input-number" type="number" id="pct-project-mgmt" value="10" min="0" max="100" />
+                <span class="input-suffix">%</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <div class="divider"></div>
+
+        <div style="font-size:var(--text-xs);font-weight:700;color:#B0AFA8;
+                    letter-spacing:0.06em;text-transform:uppercase;
+                    margin-bottom:var(--space-2);">
+          Ongoing Costs (% of Implementation)
+        </div>
+
+        <table style="width:100%;border-collapse:collapse;">
+          <tr>
+            <td style="padding:0 var(--space-2) var(--space-3) 0;width:50%;vertical-align:top;">
+              <div class="input-label" style="margin-bottom:var(--space-2);">Maintenance</div>
+              <div class="input-wrapper">
+                <input class="input-number" type="number" id="pct-maintenance" value="15" min="0" max="100" />
+                <span class="input-suffix">%</span>
+              </div>
+            </td>
+            <td style="padding:0 0 var(--space-3) var(--space-2);width:50%;vertical-align:top;">
+              <div class="input-label" style="margin-bottom:var(--space-2);">Governance</div>
+              <div class="input-wrapper">
+                <input class="input-number" type="number" id="pct-governance" value="10" min="0" max="100" />
+                <span class="input-suffix">%</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:0 var(--space-2) var(--space-3) 0;vertical-align:top;">
+              <div class="input-label" style="margin-bottom:var(--space-2);">Error Corr Y1</div>
+              <div class="input-wrapper">
+                <input class="input-number" type="number" id="pct-error-y1" value="8" min="0" max="100" />
+                <span class="input-suffix">%</span>
+              </div>
+            </td>
+            <td style="padding:0 0 var(--space-3) var(--space-2);vertical-align:top;">
+              <div class="input-label" style="margin-bottom:var(--space-2);">Error Corr Y2</div>
+              <div class="input-wrapper">
+                <input class="input-number" type="number" id="pct-error-y2" value="5" min="0" max="100" />
+                <span class="input-suffix">%</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:0 var(--space-2) 0 0;vertical-align:top;">
+              <div class="input-label" style="margin-bottom:var(--space-2);">Error Corr Y3</div>
+              <div class="input-wrapper">
+                <input class="input-number" type="number" id="pct-error-y3" value="3" min="0" max="100" />
+                <span class="input-suffix">%</span>
+              </div>
+            </td>
+            <td style="padding:0 0 0 var(--space-2);vertical-align:top;">
+              <div class="input-label" style="margin-bottom:var(--space-2);">Model Refresh</div>
+              <div class="input-wrapper">
+                <input class="input-number" type="number" id="pct-model-refresh" value="5" min="0" max="100" />
+                <span class="input-suffix">%</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+
+      <!-- ── Fixed footer — always visible ─────────────────────── -->
+      <div class="sidebar-footer">
+        <button class="btn-calculate" id="btn-calculate">
+          <span>Calculate TCoAI</span>
+        </button>
+        <button class="btn-reset" id="btn-reset">Reset to defaults</button>
+      </div>
+
+    </aside>
+
+    <!-- ════════════════════════════════════════════════════════════
+         CONTENT — OUTPUT PANEL
+    ════════════════════════════════════════════════════════════ -->
+    <section class="content">
+
+      <!-- Empty state -->
+      <div id="empty-state" class="empty-state">
+        <div class="empty-state__icon">⚡</div>
+        <div class="empty-state__title">Configure your inputs and calculate</div>
+        <div class="empty-state__sub">
+          Select your sector, business line, AI type, and deployment parameters
+          on the left — then click Calculate TCoAI to see your full
+          3-year cost and ROI analysis.
+        </div>
+        <div class="source-tag">
+          Based on McKinsey, Deloitte, Stanford HAI data · Token pricing July 2026
+        </div>
+      </div>
+
+      <!-- Results panel -->
+      <div id="results-panel" style="display:none;flex-direction:column;gap:var(--space-5);">
+
+        <!-- Scenario pills -->
+        <div id="scenario-pills" style="display:flex;gap:var(--space-2);flex-wrap:wrap;"></div>
+
+        <!-- KPI cards -->
+        <div class="section animate-in">
+          <div class="section__header">
+            <div class="section__title">
+              <span class="section-title-dot"></span>
+              3-Year Financial Summary
+            </div>
+          </div>
+          <div class="section__body">
+            <div class="output-grid" style="margin-bottom:var(--space-4);">
+              <div class="kpi-card kpi-card--conservative" id="kpi-conservative"></div>
+              <div class="kpi-card kpi-card--base"         id="kpi-base"></div>
+              <div class="kpi-card kpi-card--aggressive"   id="kpi-aggressive"></div>
+            </div>
+            <div class="output-grid--2" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);">
+              <div class="kpi-card kpi-card--highlight" id="kpi-highlight"></div>
+              <div id="interpretation-box" class="interpretation"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts row 1 -->
+        <div class="charts-grid animate-in">
+          <div class="chart-container">
+            <div class="chart-container__title">Annual TCoAI Cost vs FTE Savings</div>
+            <div class="chart-wrap"><canvas id="chart-cost-saving"></canvas></div>
+          </div>
+          <div class="chart-container">
+            <div class="chart-container__title">Cumulative Net Position — Breakeven Trajectory</div>
+            <div class="chart-wrap"><canvas id="chart-cumulative"></canvas></div>
+          </div>
+        </div>
+
+        <!-- Charts row 2 -->
+        <div class="charts-grid animate-in">
+          <div class="chart-container">
+            <div class="chart-container__title">3-Year Metrics Comparison</div>
+            <div class="chart-wrap"><canvas id="chart-metrics"></canvas></div>
+          </div>
+          <div class="chart-container">
+            <div class="chart-container__title">Token Cost Sensitivity — Volume vs Annual Cost</div>
+            <div class="chart-wrap"><canvas id="chart-token-sensitivity"></canvas></div>
+          </div>
+        </div>
+
+        <!-- TCoAI Waterfall -->
+        <div class="chart-container animate-in chart-full">
+          <div class="chart-container__title">
+            TCoAI Waterfall — Year 1 Cost Stack Breakdown
+            <span style="font-size:var(--text-xs);color:var(--gray-400);margin-left:var(--space-2);font-weight:400;">(switches with scenario tab below)</span>
+          </div>
+          <div class="chart-wrap" style="height:300px;"><canvas id="chart-waterfall"></canvas></div>
+        </div>
+
+        <!-- Year by year breakdown -->
+        <div class="section animate-in">
+          <div class="section__header">
+            <div class="section__title">
+              <span class="section-title-dot"></span>
+              Year-by-Year TCoAI Breakdown
+            </div>
+          </div>
+          <div class="section__body">
+
+            <!-- Scenario tabs -->
+            <div class="scenario-tabs">
+              <button class="scenario-tab scenario-tab--conservative" data-scenario="conservative">
+                Conservative
+              </button>
+              <button class="scenario-tab scenario-tab--base" data-scenario="base">
+                Base Case
+              </button>
+              <button class="scenario-tab scenario-tab--aggressive" data-scenario="aggressive">
+                Aggressive
+              </button>
+            </div>
+
+            <!-- Breakdown table -->
+            <div style="overflow-x:auto;">
+              <table class="breakdown-table">
+                <thead>
+                  <tr>
+                    <th style="text-align:left;">Cost Component</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="breakdown-table-body"></tbody>
+              </table>
+            </div>
+
+            <div class="source-tag">
+              All costs in selected currency · FTE saving assumes redeployment by default ·
+              Source: TCoAI Framework — Beyond the Hype White Paper (2026)
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <span class="footer__text">
+      AI Cost Calculator · TCoAI Framework · Beyond the Hype (2026) ·
+      Data: McKinsey, Deloitte, Stanford HAI, Provider pricing July 2026
+    </span>
+    <a class="footer__link" href="#" target="_blank">White Paper →</a>
+  </footer>
+
+</div>
+
+<!-- JS — load in dependency order -->
+<script src="assets/js/data.js"></script>
+<script src="assets/js/calculator.js"></script>
+<script src="assets/js/charts.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/app.js"></script>
+
+</body>
+</html>

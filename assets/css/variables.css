@@ -1,0 +1,116 @@
+:root {
+  /* ── Base surfaces (mid dark theme) ─────────────────────────── */
+  --navy:        #0C233C;
+  --navy-mid:    #1D1D1D;
+  --navy-light:  #1E49E2;
+  --white:       #ECECE6;
+  --off-white:   #1F1F1E;
+
+  /* ── KPMG Primary colors ─────────────────────────────────────── */
+  --kpmg-navy:   #00338D;
+  --kpmg-blue:   #1E49E2;
+  --kpmg-dark:   #0C233C;
+  --kpmg-ice:    #ACEAFF;
+  --kpmg-cyan:   #00B8F5;
+  --kpmg-purple: #7213EA;
+  --kpmg-pink:   #FD349C;
+
+  /* ── KPMG Accent colors (charts & infographics) ──────────────── */
+  --kpmg-sky:     #76D2FF;
+  --kpmg-violet:  #510DBC;
+  --kpmg-lavender:#B497FF;
+  --kpmg-magenta: #AB0D82;
+  --kpmg-blush:   #FFA3DA;
+  --kpmg-teal-dk: #098E7E;
+  --kpmg-teal:    #00C0AE;
+  --kpmg-mint:    #63EBDA;
+
+  /* ── KPMG Neutrals ───────────────────────────────────────────── */
+  --kpmg-n1:     #333333;
+  --kpmg-n2:     #666666;
+  --kpmg-n3:     #989898;
+  --kpmg-n4:     #B2B2B2;
+  --kpmg-n5:     #E5E5E5;
+  --kpmg-white:  #FFFFFF;
+
+  /* ── Semantic aliases ────────────────────────────────────────── */
+  --electric:    #1E49E2;
+  --electric-lt: #76D2FF;
+  --cyan:        #00B8F5;
+  --cyan-lt:     #ACEAFF;
+
+  /* UI neutrals — buttons, accents, borders */
+  --ui-accent:   #B2B2B2;
+  --ui-accent-lt:#E5E5E5;
+
+  /* Semantic colors mapped to KPMG palette */
+  --green:       #00C0AE;
+  --green-lt:    rgba(0,192,174,0.15);
+  --amber:       #00B8F5;
+  --amber-lt:    rgba(0,184,245,0.15);
+  --red:         #FD349C;
+  --red-lt:      rgba(253,52,156,0.15);
+  --purple:      #7213EA;
+  --purple-lt:   rgba(114,19,234,0.15);
+
+  /* Chart scenario colors */
+  --conservative: #00B8F5;
+  --base:         #63EBDA;
+  --aggressive:   #FD349C;
+
+  /* ── Surfaces (mid dark theme) ───────────────────────────────── */
+  --surface-0:    #1D1D1D;
+  --surface-1:    #1F1F1E;
+  --surface-2:    #2A2A28;
+  --surface-dark: #141413;
+
+  /* ── Grays ───────────────────────────────────────────────────── */
+  --gray-100:    #2A2A28;
+  --gray-200:    rgba(255,255,255,0.08);
+  --gray-400:    #666666;
+  --gray-600:    #989898;
+  --gray-800:    #B2B2B2;
+
+  /* ── Typography ──────────────────────────────────────────────── */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Fira Code', monospace;
+
+  /* ── Type scale ──────────────────────────────────────────────── */
+  --text-xs:   0.72rem;
+  --text-sm:   0.85rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.35rem;
+  --text-2xl:  1.65rem;
+  --text-3xl:  2.1rem;
+  --text-4xl:  2.75rem;
+
+  /* ── Spacing ─────────────────────────────────────────────────── */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* ── Border radius ───────────────────────────────────────────── */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ─────────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 3px rgba(0,51,141,0.12);
+  --shadow-md: 0 4px 12px rgba(0,51,141,0.16);
+  --shadow-lg: 0 8px 24px rgba(0,51,141,0.20);
+  --shadow-xl: 0 16px 40px rgba(0,51,141,0.25);
+
+  /* ── Transitions ─────────────────────────────────────────────── */
+  --ease:     cubic-bezier(0.4, 0, 0.2, 1);
+  --duration: 200ms;
+}
