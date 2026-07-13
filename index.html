@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Cost Calculator — TCoAI Framework</title>
+  <title>TCoAI Studio</title>
   <meta name="description" content="Calculate the Total Cost of AI Ownership across sectors, business lines, and deployment scenarios. Companion tool to Beyond the Hype white paper." />
 
   <!-- Fonts -->
@@ -26,15 +26,140 @@
 
   <!-- ── Header ─────────────────────────────────────────────────── -->
   <header class="header">
-    <div class="header__logo">
-      <div class="header__logo-mark">AI</div>
-      <div class="header__title">
-        <span class="header__name">AI Cost Calculator</span>
-        <span class="header__sub">TCoAI Framework · Beyond the Hype</span>
-      </div>
+
+    <!-- Left — name only -->
+    <div style="display:flex;align-items:center;">
+      <span style="font-size:var(--text-base);font-weight:600;color:#E5E5E5;letter-spacing:-0.01em;">TCoAI Studio</span>
     </div>
-    <span class="header__badge">July 2026 Pricing</span>
+
+    <!-- Right — nav links -->
+    <div style="display:flex;align-items:center;gap:var(--space-2);">
+
+      <button onclick="document.getElementById('about-modal').style.display='flex'"
+        onmouseover="this.style.color='#E5E5E5';this.style.background='rgba(255,255,255,0.05)'"
+        onmouseout="this.style.color='#989898';this.style.background='none'"
+        style="font-size:var(--text-xs);font-weight:500;color:#989898;background:none;
+               border:none;cursor:pointer;padding:var(--space-2) var(--space-3);
+               border-radius:var(--radius-md);letter-spacing:0.02em;
+               transition:color 200ms ease,background 200ms ease;">
+        About
+      </button>
+
+      <div style="width:1px;height:16px;background:#333333;"></div>
+
+      <a href="#" target="_blank"
+        style="font-size:var(--text-xs);font-weight:500;color:#989898;
+               padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);
+               letter-spacing:0.02em;display:flex;align-items:center;gap:5px;
+               transition:color 200ms ease,background 200ms ease;"
+        onmouseover="this.style.color='#E5E5E5';this.style.background='rgba(255,255,255,0.05)'"
+        onmouseout="this.style.color='#989898';this.style.background='none'">
+        White Paper
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M1 9L9 1M9 1H3M9 1V7"/>
+        </svg>
+      </a>
+
+      <a href="#" download
+        style="font-size:var(--text-xs);font-weight:500;color:#989898;
+               padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);
+               letter-spacing:0.02em;display:flex;align-items:center;gap:5px;
+               transition:color 200ms ease,background 200ms ease;"
+        onmouseover="this.style.color='#E5E5E5';this.style.background='rgba(255,255,255,0.05)'"
+        onmouseout="this.style.color='#989898';this.style.background='none'">
+        Excel Model
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M5 1v6M2 7l3 3 3-3"/>
+        </svg>
+      </a>
+
+      <div style="width:1px;height:16px;background:#333333;"></div>
+
+      <a href="https://www.linkedin.com/in/your-profile" target="_blank"
+        style="display:flex;align-items:center;justify-content:center;
+               width:30px;height:30px;border-radius:var(--radius-md);
+               color:#989898;transition:color 200ms ease,background 200ms ease;"
+        onmouseover="this.style.color='#E5E5E5';this.style.background='rgba(255,255,255,0.05)'"
+        onmouseout="this.style.color='#989898';this.style.background='none'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+      </a>
+
+    </div>
+
   </header>
+
+  <!-- About modal -->
+  <div id="about-modal"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);
+           z-index:1000;align-items:center;justify-content:center;padding:var(--space-8);"
+    onclick="if(event.target===this)this.style.display='none'">
+    <div style="background:#1D1D1D;border-radius:var(--radius-xl);border:1px solid #333333;
+                padding:var(--space-8);max-width:520px;width:100%;position:relative;">
+
+      <!-- Close -->
+      <button onclick="document.getElementById('about-modal').style.display='none'"
+        style="position:absolute;top:var(--space-4);right:var(--space-4);
+               color:#666666;font-size:18px;background:none;border:none;cursor:pointer;
+               line-height:1;transition:color 200ms ease;"
+        onmouseover="this.style.color='#E5E5E5'"
+        onmouseout="this.style.color='#666666'">✕</button>
+
+      <!-- Header -->
+      <div style="margin-bottom:var(--space-6);">
+        <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:0.08em;
+                    text-transform:uppercase;color:#00B8F5;font-family:var(--font-mono);
+                    margin-bottom:var(--space-2);">TCoAI Studio</div>
+        <div style="font-size:var(--text-xl);font-weight:600;color:#E5E5E5;line-height:1.3;">
+          AI Cost Calculator
+        </div>
+      </div>
+
+      <!-- About text -->
+      <div style="font-size:var(--text-sm);color:#989898;line-height:1.8;margin-bottom:var(--space-5);">
+        TCoAI Studio is a financial modelling tool for evaluating the Total Cost of AI Ownership across industries, business lines, and deployment scenarios. It accompanies the white paper <em style="color:#B2B2B2;">Beyond the Hype: A Practical Guide to AI Adoption Across Industries</em>.
+      </div>
+
+      <div style="font-size:var(--text-sm);color:#989898;line-height:1.8;margin-bottom:var(--space-6);">
+        Built by <strong style="color:#E5E5E5;">Pavas</strong> — Associate Consultant, KPMG India GRCS-TMT · MBA Finance, BITS Pilani. All default assumptions are sourced from McKinsey Global Survey 2024–2025, Deloitte State of GenAI in the Enterprise, Stanford HAI AI Index, and official provider pricing pages as of July 2026.
+      </div>
+
+      <!-- Links -->
+      <div style="display:flex;gap:var(--space-3);flex-wrap:wrap;">
+        <a href="#" target="_blank"
+          style="font-size:var(--text-xs);font-weight:600;color:#1D1D1D;
+                 background:#B2B2B2;padding:var(--space-2) var(--space-4);
+                 border-radius:var(--radius-md);letter-spacing:0.02em;
+                 display:flex;align-items:center;gap:5px;
+                 transition:background 200ms ease;"
+          onmouseover="this.style.background='#E5E5E5'"
+          onmouseout="this.style.background='#B2B2B2'">
+          Read White Paper
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M1 9L9 1M9 1H3M9 1V7"/>
+          </svg>
+        </a>
+
+        <a href="https://www.linkedin.com/in/your-profile" target="_blank"
+          style="font-size:var(--text-xs);font-weight:600;color:#989898;
+                 background:transparent;padding:var(--space-2) var(--space-4);
+                 border-radius:var(--radius-md);letter-spacing:0.02em;
+                 border:1px solid #333333;display:flex;align-items:center;gap:5px;
+                 transition:all 200ms ease;"
+          onmouseover="this.style.color='#E5E5E5';this.style.borderColor='#666666'"
+          onmouseout="this.style.color='#989898';this.style.borderColor='#333333'">
+          LinkedIn
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
 
   <!-- ── Main ───────────────────────────────────────────────────── -->
   <main class="main">
@@ -73,7 +198,12 @@
             <option>Large</option>
             <option>Enterprise</option>
           </select>
-          <div class="input-hint">Small &lt;$50M · Mid $50M–$500M · Large $500M–$5B · Enterprise &gt;$5B</div>
+          <div class="input-hint" style="line-height:1.8;">
+            Small &lt;$50M<br>
+            Mid $50M–$500M<br>
+            Large $500M–$5B<br>
+            Enterprise &gt;$5B
+          </div>
         </div>
 
         <div class="divider"></div>
@@ -95,10 +225,11 @@
 
         <!-- Benchmark box -->
         <div id="benchmark-box" style="display:none;
-             background:rgba(124,58,237,0.12);
+             background:rgba(0,184,245,0.06);
              border-radius:var(--radius-md);
              padding:var(--space-3) var(--space-4);
-             border:1px solid rgba(124,58,237,0.2);">
+             border-left:3px solid #00B8F5;
+             border-top:none;border-right:none;border-bottom:none;">
         </div>
 
       </div>
@@ -218,9 +349,9 @@
       <div class="tab-panel" id="tab-scenarios">
 
         <!-- Conservative -->
-        <div style="padding:var(--space-4);background:rgba(255,179,19,0.08);
-                    border-radius:var(--radius-md);border:1px solid rgba(255,179,19,0.2);">
-          <div style="font-size:var(--text-xs);font-weight:700;color:#FFB313;
+        <div style="padding:var(--space-4);background:rgba(0,184,245,0.08);
+                    border-radius:var(--radius-md);border:1px solid rgba(0,184,245,0.2);">
+          <div style="font-size:var(--text-xs);font-weight:700;color:#00B8F5;
                       letter-spacing:0.06em;text-transform:uppercase;
                       margin-bottom:var(--space-3);">
             Conservative
@@ -246,9 +377,9 @@
         </div>
 
         <!-- Base -->
-        <div style="padding:var(--space-4);background:rgba(50,168,154,0.08);
-                    border-radius:var(--radius-md);border:1px solid rgba(50,168,154,0.2);">
-          <div style="font-size:var(--text-xs);font-weight:700;color:#32A89A;
+        <div style="padding:var(--space-4);background:rgba(99,235,218,0.08);
+                    border-radius:var(--radius-md);border:1px solid rgba(99,235,218,0.2);">
+          <div style="font-size:var(--text-xs);font-weight:700;color:#63EBDA;
                       letter-spacing:0.06em;text-transform:uppercase;
                       margin-bottom:var(--space-3);">
             Base Case
@@ -274,9 +405,9 @@
         </div>
 
         <!-- Aggressive -->
-        <div style="padding:var(--space-4);background:rgba(219,78,109,0.08);
-                    border-radius:var(--radius-md);border:1px solid rgba(219,78,109,0.2);">
-          <div style="font-size:var(--text-xs);font-weight:700;color:#DB4E6D;
+        <div style="padding:var(--space-4);background:rgba(253,52,156,0.08);
+                    border-radius:var(--radius-md);border:1px solid rgba(253,52,156,0.2);">
+          <div style="font-size:var(--text-xs);font-weight:700;color:#FD349C;
                       letter-spacing:0.06em;text-transform:uppercase;
                       margin-bottom:var(--space-3);">
             Aggressive
@@ -470,18 +601,88 @@
     ════════════════════════════════════════════════════════════ -->
     <section class="content">
 
-      <!-- Empty state -->
-      <div id="empty-state" class="empty-state">
-        <div class="empty-state__icon">⚡</div>
-        <div class="empty-state__title">Configure your inputs and calculate</div>
-        <div class="empty-state__sub">
-          Select your sector, business line, AI type, and deployment parameters
-          on the left — then click Calculate TCoAI to see your full
-          3-year cost and ROI analysis.
+      <!-- Empty state — Usage guide -->
+      <div id="empty-state" class="empty-state" style="align-items:flex-start;text-align:left;padding:var(--space-8);max-width:780px;margin:0 auto;">
+
+        <!-- Title -->
+        <div style="margin-bottom:var(--space-6);padding-bottom:var(--space-5);border-bottom:1px solid #333333;width:100%;">
+          <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#00B8F5;font-family:var(--font-mono);margin-bottom:var(--space-3);">TCoAI Studio</div>
+          <div style="font-size:var(--text-xl);font-weight:600;color:#E5E5E5;line-height:1.3;margin-bottom:var(--space-3);">How to use this tool</div>
+          <div style="font-size:var(--text-sm);color:#989898;line-height:1.7;">Model the Total Cost of AI Ownership for any use case across five industries. Configure your inputs across four tabs, run the calculation, and get a full 3-year cost and ROI analysis across three deployment scenarios.</div>
         </div>
-        <div class="source-tag">
-          Based on McKinsey, Deloitte, Stanford HAI data · Token pricing July 2026
+
+        <!-- Steps -->
+        <div style="display:flex;flex-direction:column;gap:var(--space-4);width:100%;margin-bottom:var(--space-6);">
+
+          <!-- Step 1 -->
+          <div style="display:flex;gap:var(--space-4);align-items:flex-start;padding:var(--space-4);background:#1D1D1D;border-radius:var(--radius-lg);border:1px solid #333333;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#00338D,#1E49E2);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:700;color:#ACEAFF;flex-shrink:0;font-family:var(--font-mono);">1</div>
+            <div>
+              <div style="font-size:var(--text-sm);font-weight:600;color:#B2B2B2;margin-bottom:var(--space-1);">Context tab — Set your organisation profile</div>
+              <div style="font-size:var(--text-xs);color:#989898;line-height:1.6;">Select your currency and region — this sets your FTE cost defaults. Choose your organisation size, then drill down to your industry sector, business line, and specific AI use case. A benchmark card will appear showing observed ROI for your sector from published research.</div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div style="display:flex;gap:var(--space-4);align-items:flex-start;padding:var(--space-4);background:#1D1D1D;border-radius:var(--radius-lg);border:1px solid #333333;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#00338D,#1E49E2);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:700;color:#ACEAFF;flex-shrink:0;font-family:var(--font-mono);">2</div>
+            <div>
+              <div style="font-size:var(--text-sm);font-weight:600;color:#B2B2B2;margin-bottom:var(--space-1);">Deploy tab — Define your AI deployment</div>
+              <div style="font-size:var(--text-xs);color:#989898;line-height:1.6;">Select your AI type (Generative AI, Predictive AI, RPA, or Computer Vision), procurement approach (API, Buy, Build, or Open Source), and model tier. Enter your daily transaction volume and the number of FTEs currently performing the process AI will automate or augment. Use the pricing reference to compare token costs across providers.</div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div style="display:flex;gap:var(--space-4);align-items:flex-start;padding:var(--space-4);background:#1D1D1D;border-radius:var(--radius-lg);border:1px solid #333333;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#00338D,#1E49E2);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:700;color:#ACEAFF;flex-shrink:0;font-family:var(--font-mono);">3</div>
+            <div>
+              <div style="font-size:var(--text-sm);font-weight:600;color:#B2B2B2;margin-bottom:var(--space-1);">Scenarios tab — Adjust deployment assumptions</div>
+              <div style="font-size:var(--text-xs);color:#989898;line-height:1.6;">Set the AI deflection rate — the percentage of daily volume AI will handle autonomously — and the FTE reduction rate for each of the three scenarios. Conservative (35%) is recommended for a first pilot. Base Case (55%) reflects typical production performance. Aggressive (75%) represents best-in-class deployment with strong data infrastructure.</div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div style="display:flex;gap:var(--space-4);align-items:flex-start;padding:var(--space-4);background:#1D1D1D;border-radius:var(--radius-lg);border:1px solid #333333;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#00338D,#1E49E2);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:700;color:#ACEAFF;flex-shrink:0;font-family:var(--font-mono);">4</div>
+            <div>
+              <div style="font-size:var(--text-sm);font-weight:600;color:#B2B2B2;margin-bottom:var(--space-1);">Advanced tab — Override default assumptions (optional)</div>
+              <div style="font-size:var(--text-xs);color:#989898;line-height:1.6;">All cost assumptions are pre-populated with research-backed defaults. Leave them as-is for a benchmark model, or override with your organisation's specific figures — implementation cost, FTE annual cost, token pricing, indirect cost percentages, and ongoing cost percentages. Only edit what you know differs from the defaults.</div>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div style="display:flex;gap:var(--space-4);align-items:flex-start;padding:var(--space-4);background:rgba(0,184,245,0.06);border-radius:var(--radius-lg);border:1px solid rgba(0,184,245,0.2);">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#00B8F5,#63EBDA);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:700;color:#0C233C;flex-shrink:0;font-family:var(--font-mono);">5</div>
+            <div>
+              <div style="font-size:var(--text-sm);font-weight:600;color:#00B8F5;margin-bottom:var(--space-1);">Click Calculate TCoAI</div>
+              <div style="font-size:var(--text-xs);color:#989898;line-height:1.6;">Results appear instantly — KPI cards showing 3-year NPV, ROI, and payback period for each scenario. Five charts visualise your cost stack, breakeven trajectory, and token cost sensitivity. A year-by-year breakdown table shows every cost component. Switch between scenarios using the tabs in the breakdown table.</div>
+            </div>
+          </div>
+
         </div>
+
+        <!-- What TCoAI includes -->
+        <div style="width:100%;padding:var(--space-4) var(--space-5);background:#1D1D1D;border-radius:var(--radius-lg);border:1px solid #333333;margin-bottom:var(--space-5);">
+          <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#B2B2B2;margin-bottom:var(--space-4);">What TCoAI models</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--space-5);text-align:left;">
+            <div>
+              <div style="font-size:var(--text-xs);font-weight:600;color:#00B8F5;margin-bottom:var(--space-2);padding-bottom:var(--space-2);border-bottom:1px solid #333333;">Direct costs</div>
+              <div style="font-size:var(--text-xs);color:#989898;line-height:1.8;">Token and API costs<br>Infrastructure<br>Licensing</div>
+            </div>
+            <div>
+              <div style="font-size:var(--text-xs);font-weight:600;color:#63EBDA;margin-bottom:var(--space-2);padding-bottom:var(--space-2);border-bottom:1px solid #333333;">Indirect costs</div>
+              <div style="font-size:var(--text-xs);color:#989898;line-height:1.8;">Integration<br>Data preparation<br>Change management<br>Project management</div>
+            </div>
+            <div>
+              <div style="font-size:var(--text-xs);font-weight:600;color:#FD349C;margin-bottom:var(--space-2);padding-bottom:var(--space-2);border-bottom:1px solid #333333;">Hidden costs</div>
+              <div style="font-size:var(--text-xs);color:#989898;line-height:1.8;">Error correction<br>Governance<br>Model refresh<br>Maintenance</div>
+            </div>
+          </div>
+        </div>
+        
+
+      
+
       </div>
 
       <!-- Results panel -->
@@ -580,10 +781,7 @@
               </table>
             </div>
 
-            <div class="source-tag">
-              All costs in selected currency · FTE saving assumes redeployment by default ·
-              Source: TCoAI Framework — Beyond the Hype White Paper (2026)
-            </div>
+            
           </div>
         </div>
 
@@ -592,15 +790,6 @@
     </section>
 
   </main>
-
-  <!-- ── Footer ─────────────────────────────────────────────────── -->
-  <footer class="footer">
-    <span class="footer__text">
-      AI Cost Calculator · TCoAI Framework · Beyond the Hype (2026) ·
-      Data: McKinsey, Deloitte, Stanford HAI, Provider pricing July 2026
-    </span>
-    <a class="footer__link" href="#" target="_blank">White Paper →</a>
-  </footer>
 
 </div>
 

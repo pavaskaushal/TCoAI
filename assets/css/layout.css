@@ -83,15 +83,14 @@
 .sidebar {
   background: var(--white);
   border-right: 1px solid var(--gray-200);
-  padding: var(--space-6) var(--space-8) var(--space-6) var(--space-6);
-  padding-right: calc(var(--space-6) + 8px);
+  padding: 0;
   height: calc(100vh - 65px);
-  overflow-y: scroll;
+  overflow: hidden;
   position: sticky;
   top: 65px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: 0;
 }
 
 .sidebar::-webkit-scrollbar {

@@ -87,7 +87,7 @@ function updateRangeDisplay(inputId, displayId, isPercent = true) {
   const display = document.getElementById(displayId);
   if (!input || !display) return;
   display.textContent = isPercent
-    ? `${(parseFloat(input.value) * 100).toFixed(0)}%`
+    ? `${parseFloat(input.value).toFixed(0)}%`
     : input.value;
 }
 
@@ -125,13 +125,10 @@ function updateBenchmark() {
   if (!bm) { container.style.display = 'none'; return; }
   container.style.display = 'block';
   container.innerHTML = `
-    <div class="source-tag">Industry Benchmark — ${sector}</div>
-    <div style="margin-top:8px;font-size:var(--text-sm);color:var(--gray-800);">
-      <strong>${bm.topUseCase}</strong> — ${bm.roi}
-    </div>
-    <div style="font-size:var(--text-xs);color:var(--gray-400);margin-top:4px;">
-      Source: ${bm.source}
-    </div>
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#00B8F5;font-family:var(--font-mono);margin-bottom:6px;">Industry Benchmark</div>
+    <div style="font-size:var(--text-sm);font-weight:600;color:#E5E5E5;margin-bottom:4px;">${bm.topUseCase}</div>
+    <div style="font-size:var(--text-sm);color:#989898;">${bm.roi}</div>
+    <div style="font-size:10px;color:#666666;font-family:var(--font-mono);margin-top:6px;">Source: ${bm.source}</div>
   `;
 }
 

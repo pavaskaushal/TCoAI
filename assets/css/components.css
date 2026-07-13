@@ -697,8 +697,9 @@
   background: rgba(255,255,255,0.04);
   border-radius: var(--radius-md);
   padding: 3px;
-  margin-bottom: var(--space-5);
+  margin-bottom: 0;
   flex-shrink: 0;
+  margin: var(--space-5) var(--space-5) var(--space-4) var(--space-5);
 }
 
 .tab-btn {
@@ -734,6 +735,13 @@
   gap: var(--space-4);
   flex: 1;
   overflow-y: auto;
+  padding: 0 var(--space-5) var(--space-4) var(--space-5);
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.tab-panel:hover {
+  scrollbar-color: rgba(255,255,255,0.12) transparent;
 }
 
 .tab-panel.active {
@@ -741,35 +749,49 @@
 }
 
 .tab-panel::-webkit-scrollbar {
-  width: 3px;
+  width: 2px;
+}
+
+.tab-panel::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .tab-panel::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.08);
-  border-radius: var(--radius-full);
+  background: transparent;
+  border-radius: 9999px;
+}
+
+.tab-panel:hover::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+}
+
+.tab-panel::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
 }
 
 .sidebar-footer {
   flex-shrink: 0;
-  padding-top: var(--space-4);
+  padding: var(--space-4) var(--space-5);
   border-top: 1px solid #333333;
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  background: #1D1D1D;
 }
 
 /* ── Mid theme sidebar ───────────────────────────────────────────── */
 .sidebar {
   background: #1D1D1D;
   border-right: 1px solid #333333;
-  padding-right: var(--space-4) !important;
-  overflow-y: overlay !important;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.10) transparent;
+  padding: 0 !important;
+  overflow: hidden !important;
+  scrollbar-width: none;
 }
 
 .sidebar::-webkit-scrollbar {
-  width: 3px !important;
+  display: none !important;
 }
 
 .sidebar::-webkit-scrollbar-track {
@@ -825,8 +847,8 @@
 
 /* ── Header ──────────────────────────────────────────────────────── */
 .header {
-  background: #0C233C;
-  border-bottom: 1px solid #00338D;
+  background: #1A1A1A;
+  border-bottom: 1px solid #333333;
 }
 
 .header__logo-mark {
