@@ -303,17 +303,24 @@ function formatMonths(value) {
 function generateInterpretation(results, currency) {
   const base = results.base;
 
+  // Sanity flags
+  const roiUnrealistic = base.roi > 50; // above 5000%
+  const paybackUnrealistic = base.paybackMonths < 1;
+  const caveat = (roiUnrealistic || paybackUnrealistic)
+    ? ' Note: High ROI and short payback figures reflect large FTE savings relative to token costs at current inputs — validate FTE count, role level, and cost assumptions before use in a formal business case.'
+    : '';
+
   if (base.cumNet > 0 && base.npv > 0) {
     return {
       type: 'positive',
       title: '✓ Strong Financial Case',
-      text: `The base case shows a positive 3-year net position of ${formatCurrency(base.cumNet, currency)} with an NPV of ${formatCurrency(base.npv, currency)}. Estimated payback period of ${formatMonths(base.paybackMonths)}. Proceed to pilot with confidence — validate assumptions against your specific data environment before scaling.`,
+      text: `The base case shows a positive 3-year net position of ${formatCurrency(base.cumNet, currency)} with an NPV of ${formatCurrency(base.npv, currency)}. Estimated payback period of ${formatMonths(base.paybackMonths)}. Proceed to pilot with confidence — validate assumptions against your specific data environment before scaling.${caveat}`,
     };
   } else if (results.aggressive.cumNet > 0) {
     return {
       type: 'caution',
       title: '⚡ Conditional Financial Case',
-      text: `The base case shows a marginal return. The aggressive scenario (${formatPct(results.aggressive.deflection)} automation) reaches positive NPV of ${formatCurrency(results.aggressive.npv, currency)}. Consider piloting at the conservative rate first to validate performance assumptions before committing to full deployment.`,
+      text: `The base case shows a marginal return. The aggressive scenario (${formatPct(results.aggressive.deflection)} automation) reaches positive NPV of ${formatCurrency(results.aggressive.npv, currency)}. Consider piloting at the conservative rate first to validate performance assumptions before committing to full deployment.${caveat}`,
     };
   } else {
     return {

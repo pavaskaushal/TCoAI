@@ -143,7 +143,8 @@ function renderKpiCards(calcResults, currency) {
     const el  = document.getElementById(`kpi-${key}`);
     if (!el) return;
 
-    const roiPct    = (r.roi * 100).toFixed(1);
+    const roiRaw    = r.roi * 100;
+      const roiPct    = roiRaw > 9999 ? '>9999' : roiRaw.toFixed(1);
     const isPos     = r.cumNet >= 0;
     const badgeType = isPos ? 'positive' : 'negative';
     const badgeText = isPos ? `+${formatCurrency(r.cumNet, currency)}` : formatCurrency(r.cumNet, currency);
